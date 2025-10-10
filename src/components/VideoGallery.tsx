@@ -43,7 +43,7 @@ export function VideoGallery() {
       youtubeId: "SZ907tsFFDI",
       thumbnailUrl: "https://img.youtube.com/vi/SZ907tsFFDI/maxresdefault.jpg",
     },
-   
+
     {
       title: "Visualizing Paradigms for UML",
       description: "A recorded walkthrough available on YouTube",
@@ -53,20 +53,25 @@ export function VideoGallery() {
     },
   ];
 
+  // Remove duplicate entries (keep first occurrence) by youtubeId if present, otherwise by title
+  const uniqueVideos: VideoItem[] = Array.from(
+    new Map(videos.map((v) => [(v.youtubeId || v.title).toString(), v])).values()
+  );
+
   useEffect(() => {
     // Stop playback when changing videos
     setIsPlaying(false);
   }, [currentVideo]);
 
   const handlePrevious = () => {
-    setCurrentVideo((prev) => (prev > 0 ? prev - 1 : videos.length - 1));
+    setCurrentVideo((prev) => (prev > 0 ? prev - 1 : uniqueVideos.length - 1));
   };
 
   const handleNext = () => {
-    setCurrentVideo((prev) => (prev < videos.length - 1 ? prev + 1 : 0));
+    setCurrentVideo((prev) => (prev < uniqueVideos.length - 1 ? prev + 1 : 0));
   };
 
-  const current = videos[currentVideo];
+  const current = uniqueVideos[currentVideo];
 
   // build iframe src (autoplay only when isPlaying)
   const youtubeSrc = (id?: string) => {
@@ -170,7 +175,7 @@ export function VideoGallery() {
             <p className="text-muted-foreground mb-4">{current.description}</p>
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Duration: {current.duration}</span>
-              <span className="text-sm text-muted-foreground">Video {currentVideo + 1} of {videos.length}</span>
+              <span className="text-sm text-muted-foreground">Video {currentVideo + 1} of {uniqueVideos.length}</span>
             </div>
           </div>
         </div>
@@ -195,7 +200,7 @@ export function VideoGallery() {
         {/* Video List */}
         <div className="grid gap-4">
           <h3 className="text-xl mb-4">All Videos</h3>
-          {videos.map((video, index) => (
+          {uniqueVideos.map((video, index) => (
             <div
               key={index}
               className={`p-4 border rounded-lg cursor-pointer transition-colors ${
