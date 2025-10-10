@@ -1,0 +1,22 @@
+;/*FB_PKG_DELIM*/
+
+__d("FDSContactOutline20Icon",["cr:14210"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:14210")}),98);
+__d("FDSContactOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("509569"),20);b=a;g["default"]=b}),98);
+__d("FDSGroupOutline20Icon",["cr:14223"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:14223")}),98);
+__d("FDSGroupOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("485103"),20);b=a;g["default"]=b}),98);
+__d("FDSInboxOutline20Icon",["cr:15150"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:15150")}),98);
+__d("FDSInboxOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("510235"),20);b=a;g["default"]=b}),98);
+__d("FDSLocationOutline20Icon",["cr:13881"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:13881")}),98);
+__d("FDSMagnifyingGlassOutline20Icon",["cr:15244"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:15244")}),98);
+__d("FDSMagnifyingGlassOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("491286"),20);b=a;g["default"]=b}),98);
+__d("FDSMessagesOutline20Icon",["cr:14119"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:14119")}),98);
+__d("FDSMessagesOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("610742"),20);b=a;g["default"]=b}),98);
+__d("FDSPencilOutline20Icon",["cr:15381"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:15381")}),98);
+__d("FDSPencilOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("477831"),20);b=a;g["default"]=b}),98);
+__d("FDSPrivacyOutline20Icon",["cr:15493"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:15493")}),98);
+__d("FDSPrivacyOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("497248"),20);b=a;g["default"]=b}),98);
+__d("FDSProfileOutline20Icon",["cr:15521"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:15521")}),98);
+__d("FDSProfileOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("558623"),20);b=a;g["default"]=b}),98);
+__d("FDSPushpinOutline20Icon",["cr:15541"],(function(a,b,c,d,e,f,g){"use strict";g["default"]=b("cr:15541")}),98);
+__d("FDSPushpinOutline20PNGIcon.react",["ix","fbicon"],(function(a,b,c,d,e,f,g,h){"use strict";a=d("fbicon")._(h("511758"),20);b=a;g["default"]=b}),98);
+__d("MWInboxSettingsPresenceMainPushPageQuery_facebookRelayOperation",[],(function(a,b,c,d,e,f){e.exports="8959323514169499"}),null);

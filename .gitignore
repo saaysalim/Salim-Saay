@@ -1,0 +1,15 @@
+node_modules/
+build/
+.DS_Store
+.env
+dist/
+*.log
+*.local
+/.vite
+/.idea/
+.vscode/
+*.cache
+npm-debug.log
+yarn-error.log
+public/build/
+/*.zip
