@@ -151,7 +151,4 @@ This builds on GitHub Actions (Linux runner avoids Windows path issues) and push
 - Blank page: check `build/index.html` and ensure script/css src/href include `/your-repo-name/` when deploying to a repo site.
 - 404s from GitHub Pages: confirm gh-pages branch has `index.html` at root.
 - If gh-pages deploy fails locally (cache or long-path errors), use the worktree method or CI deploy.
-
----
-
-If you'd like, I can add the GitHub Actions workflow file or a safe `npm run deploy` script that performs the worktree flow. Tell me which and I'll implement it.
+  
