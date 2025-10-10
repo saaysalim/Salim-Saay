@@ -15,34 +15,33 @@ export function VideoGallery() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const videos: VideoItem[] = [
-
-     {
+    {
       title: "Web Development Basics with React LAB 1",
       description: "Techniques for developing modern web applications",
       duration: "6:58",
-      youtubeId: "BLG8l3f7B_k",
-     thumbnailUrl: "https://www.youtube.com/watch?v=by1iBAC9mnE",
+      youtubeId: "by1iBAC9mnE",
+      thumbnailUrl: "https://img.youtube.com/vi/by1iBAC9mnE/maxresdefault.jpg",
     },
     {
-      title: "Web development basics with React LAB 2",
+      title: "Web Development Basics with React LAB 2",
       description: "A comprehensive dashboard built with React and TypeScript",
       duration: "35:16",
-      youtubeId: "BLG8l3f7B_k",
-      thumbnailUrl: "https://www.youtube.com/watch?v=veto8JH4H-Y&t=244s"
+      youtubeId: "veto8JH4H-Y",
+      thumbnailUrl: "https://img.youtube.com/vi/veto8JH4H-Y/maxresdefault.jpg",
     },
     {
-      title: "Web development basics with React LAB 3",
-      description: "Develping a basic digital portfolio website using React",
+      title: "Web Development Basics with React LAB 3",
+      description: "Developing a basic digital portfolio website using React",
       duration: "42:11",
-      youtubeId: "BLG8l3f7B_k",
-      thumbnailUrl: "https://www.youtube.com/watch?v=nP6HxaWpm1A&t=10s"
+      youtubeId: "nP6HxaWpm1A",
+      thumbnailUrl: "https://img.youtube.com/vi/nP6HxaWpm1A/maxresdefault.jpg",
     },
     {
-      title: "Web development basics with React LAB 4",
-      description: "Formating a React project",
+      title: "Web Development Basics with React LAB 4",
+      description: "Formatting a React project",
       duration: "2:56",
-      youtubeId: "BLG8l3f7B_k",
-      thumbnailUrl: "https://www.youtube.com/watch?v=SZ907tsFFDI&t=16s",
+      youtubeId: "SZ907tsFFDI",
+      thumbnailUrl: "https://img.youtube.com/vi/SZ907tsFFDI/maxresdefault.jpg",
     },
    
     {
