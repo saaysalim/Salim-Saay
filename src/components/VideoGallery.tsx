@@ -15,27 +15,36 @@ export function VideoGallery() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const videos: VideoItem[] = [
+
+     {
+      title: "Web Development Basics with React LAB 1",
+      description: "Techniques for developing modern web applications",
+      duration: "6:58",
+      youtubeId: "BLG8l3f7B_k",
+     thumbnailUrl: "https://www.youtube.com/watch?v=by1iBAC9mnE",
+    },
     {
-      title: "Project Demo - React Dashboard",
+      title: "Web development basics with React LAB 2",
       description: "A comprehensive dashboard built with React and TypeScript",
-      duration: "5:30",
-      thumbnailUrl: undefined,
+      duration: "35:16",
+      youtubeId: "BLG8l3f7B_k",
+      thumbnailUrl: "https://www.youtube.com/watch?v=veto8JH4H-Y&t=244s"
     },
     {
-      title: "Machine Learning Implementation",
-      description: "Implementing ML algorithms in Python",
-      duration: "8:45",
+      title: "Web development basics with React LAB 3",
+      description: "Develping a basic digital portfolio website using React",
+      duration: "42:11",
+      youtubeId: "BLG8l3f7B_k",
+      thumbnailUrl: "https://www.youtube.com/watch?v=nP6HxaWpm1A&t=10s"
     },
     {
-      title: "Mobile App Development",
-      description: "Building cross-platform mobile apps with React Native",
-      duration: "12:20",
+      title: "Web development basics with React LAB 4",
+      description: "Formating a React project",
+      duration: "2:56",
+      youtubeId: "BLG8l3f7B_k",
+      thumbnailUrl: "https://www.youtube.com/watch?v=SZ907tsFFDI&t=16s",
     },
-    {
-      title: "Web Performance Optimization",
-      description: "Techniques for optimizing web application performance",
-      duration: "6:15",
-    },
+   
     {
       title: "Visualizing Paradigms for UML",
       description: "A recorded walkthrough available on YouTube",
