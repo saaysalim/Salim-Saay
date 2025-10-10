@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Play, Pause, Volume2, Maximize } from "lucide-react";
 
@@ -7,6 +7,7 @@ interface VideoItem {
   description: string;
   duration: string;
   youtubeId?: string; // optional: if present render an embedded YouTube iframe
+  thumbnailUrl?: string;
 }
 
 export function VideoGallery() {
@@ -18,6 +19,7 @@ export function VideoGallery() {
       title: "Project Demo - React Dashboard",
       description: "A comprehensive dashboard built with React and TypeScript",
       duration: "5:30",
+      thumbnailUrl: undefined,
     },
     {
       title: "Machine Learning Implementation",
@@ -39,8 +41,14 @@ export function VideoGallery() {
       description: "A recorded walkthrough available on YouTube",
       duration: "10:42",
       youtubeId: "BLG8l3f7B_k",
+      thumbnailUrl: "https://img.youtube.com/vi/BLG8l3f7B_k/maxresdefault.jpg",
     },
   ];
+
+  useEffect(() => {
+    // Stop playback when changing videos
+    setIsPlaying(false);
+  }, [currentVideo]);
 
   const handlePrevious = () => {
     setCurrentVideo((prev) => (prev > 0 ? prev - 1 : videos.length - 1));
@@ -51,6 +59,17 @@ export function VideoGallery() {
   };
 
   const current = videos[currentVideo];
+
+  // build iframe src (autoplay only when isPlaying)
+  const youtubeSrc = (id?: string) => {
+    if (!id) return undefined;
+    const params = new URLSearchParams({ rel: '0' });
+    if (isPlaying) params.set('autoplay', '1');
+    // modestbranding=1 hides the YouTube logo, controls=1 shows controls
+    params.set('modestbranding', '1');
+    params.set('controls', '1');
+    return `https://www.youtube.com/embed/${id}?${params.toString()}`;
+  };
 
   return (
     <section id="video-gallery" className="py-20 px-4 bg-background min-h-screen">
@@ -70,23 +89,42 @@ export function VideoGallery() {
               // Render YouTube iframe when a youtubeId is present
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${current.youtubeId}?rel=0`}
+                src={youtubeSrc(current.youtubeId)}
                 title={current.title}
                 frameBorder="0"
+                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             ) : (
               <>
-                <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Play className="w-8 h-8 ml-1" />
+                {current.thumbnailUrl ? (
+                  <img
+                    src={current.thumbnailUrl}
+                    alt={current.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Play className="w-8 h-8 ml-1" />
+                      </div>
+                      <h3 className="text-lg mb-2">{current.title}</h3>
+                      <p className="text-sm text-white/80">{current.description}</p>
                     </div>
-                    <h3 className="text-lg mb-2">{current.title}</h3>
-                    <p className="text-sm text-white/80">{current.description}</p>
                   </div>
-                </div>
+                )}
+
+                {/* Play overlay for non-iframe videos */}
+                {!current.youtubeId && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto">
+                      <Play className="w-10 h-10 text-white ml-1" />
+                    </div>
+                  </div>
+                )}
               </>
             )}
 
@@ -95,7 +133,7 @@ export function VideoGallery() {
               <div className="flex items-center justify-between text-white">
                 <div className="flex items-center space-x-4">
                   <button
-                    onClick={() => setIsPlaying(!isPlaying)}
+                    onClick={() => setIsPlaying((p) => !p)}
                     className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
                   >
                     {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
