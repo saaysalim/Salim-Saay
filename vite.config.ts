@@ -4,6 +4,9 @@
   import path from 'path';
 
   export default defineConfig({
+    // When deploying to GitHub Pages for a repository site, set the base to the repo name
+    // so built assets reference "/Salim-Saay/..." instead of "/..." which breaks on gh-pages.
+    base: '/Salim-Saay/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
