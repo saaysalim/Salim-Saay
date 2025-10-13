@@ -8,7 +8,7 @@ import { Footer } from "./components/Footer";
 import { Blog } from "./components/Blog";
 import { Gallery } from "./components/Gallery";
 import { VideoGallery } from "./components/VideoGallery";
-import { Post } from "./components/Post";
+import { PostFeed } from "./components/PostFeed";
 import { Publications } from "./components/Publications";
 
 type PageType = 'about' | 'projects' | 'contact' | 'gallery' | 'blog' | 'video-gallery' | 'education' | 'post' | 'publications';
@@ -31,7 +31,7 @@ export default function App() {
       case 'video-gallery':
         return <VideoGallery />;
       case 'post':
-        return <Post />;
+        return <PostFeed />;
       case 'education':
         return <Education />;
       case 'publications':
