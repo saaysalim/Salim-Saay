@@ -72,7 +72,7 @@ export function Gallery() {
     {
       id: 8,
       title: "AfgREN",
-      category: "NATO for peace and security program",
+      category: "NATO funded science for peace and security program",
       description: "Presentation of AfgREN project to the NATO leaders 2014",
       image: afgrenjpg
     },

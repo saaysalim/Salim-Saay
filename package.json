@@ -1,5 +1,5 @@
 {
-      "name": "Digital Portfolio for Salim Saay",
+      "name": "digital-portfolio-salim-saay",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -57,6 +57,8 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "vite build"
+            "build": "vite build",
+            "predeploy": "npm run build",
+            "deploy": "node ./scripts/publish-ghpages.js"
       }
 }
