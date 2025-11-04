@@ -61,7 +61,7 @@ export function Post() {
               {/* Author */}
               <div className="space-y-2">
                 <Label htmlFor="author" className="text-base">Author:</Label>
-                <Select value={formData.author} onValueChange={(value) => setFormData(prev => ({ ...prev, author: value }))}>
+                <Select value={formData.author} onValueChange={(value: string) => setFormData(prev => ({ ...prev, author: value }))}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select author" />
                   </SelectTrigger>
