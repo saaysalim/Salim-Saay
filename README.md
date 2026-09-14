@@ -1,154 +1,151 @@
-﻿# Digital Portfolio  Salim Saay
+# Digital Portfolio - Salim Saay
 
-This repository hosts a Vite + React digital portfolio for Salim Saay. The site is built with Vite and deployed to GitHub Pages.
+A component-based digital portfolio built with React, TypeScript, Vite, and Redux Toolkit.
 
-## Deploy to GitHub Pages  Quick Guide
+This project presents academic profile, publications, projects, media, and an interactive post feed with optional backend support.
 
-This short guide shows the minimum steps to connect VS Code to GitHub, build a Vite site, and publish it as a live GitHub Pages site. It includes a safe local publish method and a recommended GitHub Actions CI deploy.
+## Live Site
+- GitHub Pages: https://saaysalim.github.io/Salim-Saay/
 
-### Prerequisites
-- Git installed and configured (git --version)
-- Node.js + npm installed
-- A GitHub account and a repository created (e.g. https://github.com/<your-username>/<repo>.git)
-- VS Code with the project folder opened
+## Project Goals
+- Present a professional and academic profile in a modern web UI.
+- Keep content modular using reusable React components.
+- Support both static hosting and richer local mode with a Node.js API.
+- Maintain a clean structure that can grow over time.
 
-### 1) Initialize repository in VS Code (or use existing repo)
-- If not already a git repo:
+## Tech Stack
+- Frontend: React 18, TypeScript, Vite 6
+- State management: Redux Toolkit, React Redux
+- UI primitives: Radix UI + utility UI components
+- Styling: utility-first class approach with shared global styles
+- Icons: Lucide React
+- Optional backend: Node.js + Express (JSON-file persistence)
+
+## Features
+- Multi-section portfolio navigation (single-page app behavior)
+- About, Education, Projects, Publications, Contact, Gallery, Video Gallery sections
+- Post feed with likes, comments, image support, and local fallback
+- Simple auth flow for posting when backend is running
+- Responsive header navigation with mobile menu
+
+## Component-Based Architecture
+The app is built around isolated feature components composed by a single root container.
+
+- App shell:
+  - Header (navigation)
+  - Main content (page-level feature component rendered by current route state)
+  - Footer
+- Feature components:
+  - About, Projects, Contact, Education, Publications, Gallery, VideoGallery, Blog, PostFeed
+- Shared UI layer:
+  - Reusable primitives from src/components/ui (card, button, dialog, input, etc.)
+- State layer:
+  - Redux store with auth and posts slices
+
+A detailed architecture document is available at:
+- ARCHITECTURE.md
+
+## Folder Structure
+
+```text
+.
+|-- src/
+|   |-- App.tsx
+|   |-- main.tsx
+|   |-- components/
+|   |   |-- Header.tsx
+|   |   |-- Footer.tsx
+|   |   |-- About.tsx
+|   |   |-- Projects.tsx
+|   |   |-- Contact.tsx
+|   |   |-- Education.tsx
+|   |   |-- Publications.tsx
+|   |   |-- Gallery.tsx
+|   |   |-- VideoGallery.tsx
+|   |   |-- Blog.tsx
+|   |   |-- PostFeed.tsx
+|   |   |-- ui/
+|   |   `-- figma/
+|   |-- store/
+|   |   |-- store.ts
+|   |   |-- postsSlice.ts
+|   |   `-- authSlice.ts
+|   |-- styles/
+|   `-- assets/
+|-- server/
+|   |-- index.js
+|   |-- posts.json
+|   |-- users.json
+|   `-- sessions.json
+|-- build/
+|-- vite.config.ts
+`-- package.json
+```
+
+## Local Development
+
+### 1) Install frontend dependencies
 
 ```powershell
-cd "C:\path\to\your\project"
-git init
-git config user.name "Your Name"
-git config user.email "you@example.com"
-# create .gitignore (node_modules, build, .env, etc.)
-# stage and commit
-git add -A
-git commit -m "Initial commit"
-```
-
-### 2) Connect to GitHub remote and push main
-
-```powershell
-# replace the URL with your repo
-git remote add origin https://github.com/<your-username>/<repo>.git
-# ensure main branch name
-git branch -M main
-git push -u origin main
-```
-
-### 3) Vite project configuration for GitHub Pages
-When publishing a GitHub Pages repository site (not a user/org site), the site is served under `/your-repo-name/` so your asset URLs must include that base. In `vite.config.ts` set:
-
-```ts
-export default defineConfig({
-  base: '/<repo-name>/', // <- set to your repo name, e.g. '/Salim-Saay/'
-  // ...other config
-})
-```
-
-Then ensure `package.json` has these scripts (typical):
-
-```json
-"scripts": {
-  "dev": "vite",
-  "build": "vite build"
-}
-```
-
-### 4) Install dependencies and build
-
-```powershell
-# install (use npm ci if package-lock.json exists)
 npm install
-# build production output
+```
+
+### 2) Run frontend (Vite)
+
+```powershell
+npm run dev
+```
+
+By default, Vite is configured to run on port 3000.
+
+### 3) Build frontend
+
+```powershell
 npm run build
-# this creates a `build/` folder (or `dist/` depending on config)
 ```
 
-### 5) Deploy options  choose one
+Output is generated in build/.
 
-#### A) Quick local deploy using `gh-pages` (works often but can fail on Windows with long path issues)
+## Optional Backend (Post Feed API)
+The frontend can run without the backend, but PostFeed gets full functionality when server is running.
+
+### Start backend
 
 ```powershell
-# install gh-pages as dev dependency
-npm install --save-dev gh-pages
-# add scripts in package.json
-# "predeploy": "npm run build",
-# "deploy": "gh-pages -d build"
-# then run:
-npm run deploy
+cd server
+npm install
+npm start
 ```
 
-Notes: if you see errors from the gh-pages tool about a cache or "destination path already exists" you can try removing the cache:
+Server runs on http://localhost:5000.
 
-```powershell
-Remove-Item -Recurse -Force node_modules\.cache\gh-pages -ErrorAction Ignore
-```
+### API Endpoints
+- GET /posts
+- POST /posts
+- DELETE /posts/:id
+- POST /posts/:id/comments
+- POST /posts/:id/likes
+- POST /auth/register
+- POST /auth/login
 
-If `gh-pages` fails due to Windows path length or node_modules reset errors, use option (B) below.
+## Deployment
+This project is configured for GitHub Pages with:
+- Vite base path: /Salim-Saay/
+- Build output folder: build/
 
-#### B) Safe local deploy using a short-path git worktree (recommended on Windows)
+Deployment references:
+- README-DEPLOY.md
+- DEPLOY_TO_GITHUB_PAGES.md
 
-This copies only the `build/` contents into a short temporary worktree, commits and force-pushes to the `gh-pages` branch without touching `node_modules`.
+## Known Notes
+- If backend is unavailable, PostFeed falls back to localStorage.
+- Current backend auth and persistence are for development/demo use only.
 
-```powershell
-# run from your repo root
-$td = 'C:\gh-pages-deploy'
-if (Test-Path $td) { Remove-Item -Recurse -Force $td }
-# create a worktree checked out to gh-pages (create or reset)
-git worktree add -B gh-pages $td origin/gh-pages
-# clear the worktree (leave .git)
-Get-ChildItem -Force -Path $td | Where-Object { $_.Name -ne '.git' } | ForEach-Object { Remove-Item -Recurse -Force -LiteralPath $_.FullName }
-# copy build files
-Copy-Item -Path .\build\* -Destination $td -Recurse -Force
-# commit & push from the worktree
-Set-Location $td
-git add -A
-if (-not (git diff --cached --quiet)) { git commit -m "Deploy site: $(Get-Date -Format o)" }
-git push origin gh-pages --force
-# cleanup
-Set-Location -Path "$(Get-Location -LiteralPath)"
-git worktree remove $td --force
-if (Test-Path $td) { Remove-Item -Recurse -Force $td }
-```
+## Recommended Next Improvements
+- Add a client-side router for URL-based navigation.
+- Move static content into structured JSON or CMS source.
+- Add automated tests for PostFeed reducers and API behavior.
+- Harden backend auth and password storage for production readiness.
 
-#### C) Recommended: CI deploy via GitHub Actions (best practice)
-- Create a workflow file `.github/workflows/deploy-gh-pages.yml` with the following snippet (adjust if needed):
-
-```yaml
-name: Build and deploy to GitHub Pages
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - run: npm ci
-      - run: npm run build
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-```
-
-This builds on GitHub Actions (Linux runner avoids Windows path issues) and pushes `build/` to `gh-pages`. After merging this workflow into `main`, every push to `main` will rebuild and publish.
-
-### 6) Verify the site
-- Wait ~12 minutes after the push. Visit:
-  - https://<your-username>.github.io/<repo-name>/
-- If page is blank, open DevTools (F12): check Network for 404s and Console for JS errors.
-  - Common cause: missing `base` in Vite -> asset requests go to `/assets/...` instead of `/repo-name/assets/...`.
-
-### Troubleshooting quick tips
-- Blank page: check `build/index.html` and ensure script/css src/href include `/your-repo-name/` when deploying to a repo site.
-- 404s from GitHub Pages: confirm gh-pages branch has `index.html` at root.
-- If gh-pages deploy fails locally (cache or long-path errors), use the worktree method or CI deploy.
-  
+## Author
+Salim Saay
