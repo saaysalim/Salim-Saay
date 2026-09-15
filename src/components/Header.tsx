@@ -1,19 +1,26 @@
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Search, Sun, X } from "lucide-react";
 import { useState } from "react";
 import profileImage from '../assets/SalimSaay.png';
+import { pageDescriptors, PageType, primaryNavItems } from "../lib/navigation";
 
-type PageType = 'about' | 'projects' | 'contact' | 'gallery' | 'blog' | 'video-gallery' | 'education' | 'post' | 'publications';
 interface HeaderProps {
   readonly onNavigate: (page: PageType) => void;
+  readonly isDarkMode: boolean;
+  readonly onToggleTheme: () => void;
 }
 
-export function Header({ onNavigate }: HeaderProps) {
+export function Header({ onNavigate, isDarkMode, onToggleTheme }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavigation = (page: PageType) => {
     onNavigate(page);
     setIsMenuOpen(false);
   };
+
+  const navItems = primaryNavItems.map((page) => {
+    const descriptor = pageDescriptors.find((entry) => entry.page === page);
+    return { page, label: descriptor?.label ?? page };
+  });
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'var(--header-bg)' }}>
@@ -34,130 +41,61 @@ export function Header({ onNavigate }: HeaderProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            <button
-              onClick={() => handleNavigation('about')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => handleNavigation('post')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Post
-            </button>
-            <button
-              onClick={() => handleNavigation('about')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              About
-            </button>
-            <button
-              onClick={() => handleNavigation('projects')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Project
-            </button>
-            <button
-              onClick={() => handleNavigation('publications')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Publications
-            </button>
-            <button
-              onClick={() => handleNavigation('contact')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Contact
-            </button>
-            <button
-              onClick={() => handleNavigation('gallery')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Gallery
-            </button>
-            <button
-              onClick={() => handleNavigation('video-gallery')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              VideoGallery
-            </button>
-            <button
-              onClick={() => handleNavigation('education')}
-              className="text-white/90 hover:text-white transition-colors text-sm"
-            >
-              Education
-            </button>
+          <nav className="hidden xl:flex items-center space-x-5">
+            {navItems.map((item) => (
+              <button
+                key={item.page}
+                onClick={() => handleNavigation(item.page)}
+                className="text-white/90 hover:text-white transition-colors text-sm"
+              >
+                {item.page === 'search' ? (
+                  <span className="inline-flex items-center gap-1.5"><Search className="w-4 h-4" /> {item.label}</span>
+                ) : item.label}
+              </button>
+            ))}
           </nav>
 
+          <div className="hidden lg:flex items-center gap-3 ml-4">
+            <button
+              onClick={onToggleTheme}
+              className="inline-flex items-center justify-center rounded-full border border-white/20 p-2 text-white hover:bg-white/10 transition-colors"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          </div>
+
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-white"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-2 xl:hidden">
+            <button
+              onClick={onToggleTheme}
+              className="p-2 text-white border border-white/20 rounded-full"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="xl:hidden p-2 text-white"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="lg:hidden mt-4 pb-4 border-t border-white/20 pt-4">
+          <nav className="xl:hidden mt-4 pb-4 border-t border-white/20 pt-4">
             <div className="flex flex-col space-y-4">
-              <button
-                onClick={() => handleNavigation('about')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => handleNavigation('post')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Post
-              </button>
-              <button
-                onClick={() => handleNavigation('about')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => handleNavigation('projects')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Project
-              </button>
-              <button
-                onClick={() => handleNavigation('publications')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Publications
-              </button>
-              <button
-                onClick={() => handleNavigation('contact')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Contact
-              </button>
-              <button
-                onClick={() => handleNavigation('gallery')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Gallery
-              </button>
-              <button
-                onClick={() => handleNavigation('video-gallery')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                VideoGallery
-              </button>
-              <button
-                onClick={() => handleNavigation('education')}
-                className="text-left text-white/90 hover:text-white transition-colors"
-              >
-                Education
-              </button>
+              {navItems.map((item) => (
+                <button
+                  key={item.page}
+                  onClick={() => handleNavigation(item.page)}
+                  className="text-left text-white/90 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
           </nav>
         )}
